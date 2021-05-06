@@ -1,0 +1,18 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+    <div class="my-4">
+        <div >
+            {% for post in post_data %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ post.author }} {{ post.created|date }}</h4>
+                        <p class="card-text">{{ post.content|truncatechars:100 }}</p>
+                        <a href="{% url 'read' post.pk %}" class="btn btn-secondary " role="button" aria-pressed="true">いいね{{ post.read }}</a>
+                    </div>
+                    <a href="{% url 'post_detail' post.id %}" class="stretched-link"></a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

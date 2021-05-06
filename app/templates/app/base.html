@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>startSNS</title>
+</head>
+<body>
+    <main>
+        <div class="row">
+            <div class="col-md-2">
+                <nav class="navbar nav-stacked navbar-dark bg-dark sticky-top">
+                    <div class="container">
+                        <ul class="navbar-nav mx-auto flex-column">
+                            <a class="navbar-brand" href="/">tweeter</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">ホーム</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'post_new' %}">投稿</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'account_signup' %}">サインアップ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'account_login' %}">ログイン</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="col-md-10">
+                <div class="container">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    {% block extra_js %}
+    {% endblock %}
+</body>
+</html>
